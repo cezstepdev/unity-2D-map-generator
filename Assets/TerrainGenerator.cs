@@ -10,6 +10,7 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] int fill;
     [SerializeField] GameObject ground;
     [SerializeField] GameObject cave;
+    public GameObject player;
     int[] perLineHeight;
     int[,] map;
 
@@ -27,6 +28,7 @@ public class TerrainGenerator : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.RightArrow)) ;
+        Debug.Log(getPlayerX());
     }
 
     private int[,] generateArray(bool empty)
@@ -42,6 +44,11 @@ public class TerrainGenerator : MonoBehaviour
         }
 
         return map;
+    }
+
+    public int getPlayerX()
+    {
+        return (int)player.transform.position.x;
     }
 
     private int getSurroundingGround(int gridX, int gridY)
