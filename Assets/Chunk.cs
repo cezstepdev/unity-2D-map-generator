@@ -25,6 +25,7 @@ public class Chunk : MonoBehaviour
     int[] perLineHeight;
     //Chunk array representation
     int[,] map;
+    //the coordinate of the beginning of chunk
     private int chunkBegin;
 
 
@@ -43,13 +44,15 @@ public class Chunk : MonoBehaviour
     {
         this.chunkBegin = chunkBegin;
         perLineHeight = new int[width];
-        map = generateArray(true);
+        map = generateArray();
         map = terrainGenerator(map);
-        smoothMap();
+        smoothCaves();
         renderMap(map);
     }
 
-    private int[,] generateArray(bool empty)
+    //fill the array with zeros
+    //empty map
+    private int[,] generateArray()
     {
         int[,] map = new int[width, height];
 
@@ -57,12 +60,13 @@ public class Chunk : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                map[x, y] = empty ? 0 : 1;
+                map[x, y] = 0;
             }
         }
 
         return map;
     }
+    //generating noisy terrain
     private int[,] terrainGenerator(int[,] map)
     {
         int perlinHeight;
@@ -84,6 +88,7 @@ public class Chunk : MonoBehaviour
         return map;
     }
 
+    //calculating the count of caves around the object
     private int getSurroundingGround(int gridX, int gridY)
     {
         int groundCount = 0;
@@ -107,7 +112,8 @@ public class Chunk : MonoBehaviour
         return groundCount;
     }
 
-    private void smoothMap()
+    //smoothing caves
+    private void smoothCaves()
     {
         int surroudingGround;
         for (int i = 0; i < caveSmoothness; i++)
@@ -137,6 +143,7 @@ public class Chunk : MonoBehaviour
         }
     }
 
+    //final rendering map to screen
     private void renderMap(int[,] map)
     {
         int xBlockPlace = chunkBegin;

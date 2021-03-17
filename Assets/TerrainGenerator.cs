@@ -2,7 +2,6 @@
 
 public class TerrainGenerator : MonoBehaviour
 {
-    
     public GameObject player;
     private int chunkBegin;
     private int chunkEnd;
@@ -22,17 +21,16 @@ public class TerrainGenerator : MonoBehaviour
     [SerializeField] GameObject ground;
     //Prefab object representing caves
     [SerializeField] GameObject cave;
-    //Height in every X posiotion
-    int[] perLineHeight;
 
     // Start is called before the first frame update
     void Start()
     {
+        //assigning static values ​​needed to generate chunk
         assignValuesToChunk();
-        
+        //computing the x position of the first chunk
         chunkBegin = getPlayerX() - width / 2;
         chunkEnd = getPlayerX() + width / 2;
-        Debug.Log(chunkBegin + " " + chunkEnd + " "+ " " + width);
+        //Creating first chunk
         Chunk chunk = new Chunk(chunkBegin);
     }
 
@@ -51,13 +49,14 @@ public class TerrainGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Playerx: " + getPlayerX() + " chunkEnd: " + chunkEnd);
+        //If player closer to end of chunk then render weight then we create next chunk
         if (getPlayerX() + width> chunkEnd)
         {
             new Chunk(chunkEnd);
             chunkEnd += width;
         }
-        if(getPlayerX() - width < chunkBegin)
+        //If player closer to begin of chunk then render weight then we create next chunk
+        if (getPlayerX() - width < chunkBegin)
         {
             new Chunk(chunkBegin - width);
             chunkBegin -= width;
