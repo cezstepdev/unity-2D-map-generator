@@ -299,6 +299,11 @@ PrefabInstance:
       propertyPath: m_ShapeTexture
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 740078867042666652, guid: 368e4a7e4439b8d41b98e2f2af8f16ba,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 740078867042666655, guid: 368e4a7e4439b8d41b98e2f2af8f16ba,
         type: 3}
       propertyPath: m_Name
@@ -338,8 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922636b95a5191441a96fc82029295de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 2000
-  height: 100
   smoothness: 90
   caveSmoothness: 1
   seed: 100

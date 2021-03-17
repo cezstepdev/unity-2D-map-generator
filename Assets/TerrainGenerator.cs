@@ -2,7 +2,8 @@
 
 public class TerrainGenerator : MonoBehaviour
 {
-    [SerializeField] int width, height;
+    private int width = 40;
+    private const int height = 100;
     [SerializeField] float smoothness;
     [SerializeField] int caveSmoothness;
     [SerializeField] float seed;
