@@ -343,13 +343,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922636b95a5191441a96fc82029295de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 752593605}
+  height: 100
+  width: 40
   smoothness: 90
   caveSmoothness: 1
   seed: 100
   fill: 54
   ground: {fileID: 7435040989738859394, guid: 665c09bb02e41d04da3788a8d3ccb231, type: 3}
   cave: {fileID: 5849130776414368623, guid: 6116067781fc97840ba5d77d0a28c10a, type: 3}
-  player: {fileID: 752593605}
 --- !u!212 &1611488076
 SpriteRenderer:
   m_ObjectHideFlags: 0

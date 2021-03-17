@@ -2,142 +2,71 @@
 
 public class TerrainGenerator : MonoBehaviour
 {
-    private int width = 40;
-    private const int height = 100;
+    
+    public GameObject player;
+    private int chunkBegin;
+    private int chunkEnd;
+
+    //Render width and height
+    [SerializeField] int height, width;
+    //Smoothness of the gound
     [SerializeField] float smoothness;
+    //Smoothness of the caves
     [SerializeField] int caveSmoothness;
+    //Seed to RadnomGenerator
     [SerializeField] float seed;
+    //ground to cave ratio
     [Range(0, 100)]
     [SerializeField] int fill;
+    //Prefab object representing gound
     [SerializeField] GameObject ground;
+    //Prefab object representing caves
     [SerializeField] GameObject cave;
-    public GameObject player;
+    //Height in every X posiotion
     int[] perLineHeight;
-    int[,] map;
 
     // Start is called before the first frame update
     void Start()
     {
-        perLineHeight = new int[width];
-        map = generateArray(true);
-        map = terrainGenerator(map);
-        smoothMap();
-        renderMap(map);
+        assignValuesToChunk();
+        
+        chunkBegin = getPlayerX() - width / 2;
+        chunkEnd = getPlayerX() + width / 2;
+        Debug.Log(chunkBegin + " " + chunkEnd + " "+ " " + width);
+        Chunk chunk = new Chunk(chunkBegin);
+    }
+
+    void assignValuesToChunk()
+    {
+        Chunk.height = height;
+        Chunk.width = width;
+        Chunk.smoothness = smoothness;
+        Chunk.caveSmoothness = caveSmoothness;
+        Chunk.seed = seed;
+        Chunk.fill = fill;
+        Chunk.ground = ground;
+        Chunk.cave = cave;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.RightArrow)) ;
-        Debug.Log(getPlayerX());
-    }
-
-    private int[,] generateArray(bool empty)
-    {
-        int[,] map = new int[width, height];
-
-        for (int x = 0; x < width; x++)
+        //Debug.Log("Playerx: " + getPlayerX() + " chunkEnd: " + chunkEnd);
+        if (getPlayerX() + width> chunkEnd)
         {
-            for (int y = 0; y < height; y++)
-            {
-                map[x, y] = empty ? 0 : 1;
-            }
+            new Chunk(chunkEnd);
+            chunkEnd += width;
         }
-
-        return map;
+        if(getPlayerX() - width < chunkBegin)
+        {
+            new Chunk(chunkBegin - width);
+            chunkBegin -= width;
+        }
+            
     }
 
-    public int getPlayerX()
+    int getPlayerX()
     {
         return (int)player.transform.position.x;
-    }
-
-    private int getSurroundingGround(int gridX, int gridY)
-    {
-        int groundCount = 0;
-
-        for(int nebX = gridX - 1; nebX <= gridX + 1; nebX++)
-        {
-            for(int nebY = gridY - 1; nebY <= gridY + 1; nebY++)
-            {
-                if (nebX >= 0 && nebY >= 0 && nebX < width && nebY < height)
-                {
-                    if (nebX != gridX || nebY != gridY)
-                    {
-                        if (map[nebX, nebY] == 1)
-                        {
-                            groundCount++;
-                        }
-                    }
-                }
-            }
-        }
-        return groundCount;
-    }
-
-    private void smoothMap()
-    {
-        int surroudingGround;
-        for (int i = 0; i < caveSmoothness; i++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < perLineHeight[x]; y++)
-                {
-                    if(x == 0 || y == 0  || x == width - 1 || y == perLineHeight[x] - 1)
-                    {
-                        map[x, y] = 1;
-                    }
-                    else
-                    {
-                        surroudingGround = getSurroundingGround(x, y);
-                        if (surroudingGround > 4)
-                        {
-                            map[x, y] = 1;
-                        }
-                        else if (surroudingGround < 4)
-                        {
-                            map[x, y] = 2;
-                        }
-                    }    
-                }
-            }
-        }
-    }
-    private int[,] terrainGenerator(int[,] map)
-    {
-        int perlinHeight;
-        System.Random random = new System.Random(seed.GetHashCode());
-
-        for (int x = 0; x < width; x++)
-        {
-            perlinHeight = Mathf.RoundToInt(Mathf.PerlinNoise(x / smoothness, seed) * height);
-            perLineHeight[x] = perlinHeight;
-
-            for (int y = 0; y < perlinHeight; y++)
-            {
-                map[x, y] = (random.Next(1, 100) < fill) ? 1 : 2;   
-            }
-        }
-
-        return map;
-    }
-
-    private void renderMap(int[,] map)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                if (map[x, y] == 1)
-                {
-                    Instantiate(ground, new Vector2(x, y), Quaternion.identity);
-                }
-                else if(map[x,y] == 2)
-                {
-                    Instantiate(cave, new Vector2(x, y), Quaternion.identity);
-                }
-            }
-        }
     }
 }
