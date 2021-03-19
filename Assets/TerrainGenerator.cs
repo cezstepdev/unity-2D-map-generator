@@ -5,6 +5,9 @@ public class TerrainGenerator : MonoBehaviour
     public GameObject player;
     private int chunkBegin;
     private int chunkEnd;
+    private Chunk leftChunk;
+    private Chunk centerChunk;
+    private Chunk rightChunk;
 
     //Render width and height
     [SerializeField] int height, width;
@@ -31,7 +34,7 @@ public class TerrainGenerator : MonoBehaviour
         chunkBegin = getPlayerX() - width / 2;
         chunkEnd = getPlayerX() + width / 2;
         //Creating first chunk
-        Chunk chunk = new Chunk(chunkBegin);
+        centerChunk = new Chunk(chunkBegin);
     }
 
     void assignValuesToChunk()
@@ -49,19 +52,35 @@ public class TerrainGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //If player closer to end of chunk then render weight then we create next chunk
-        if (getPlayerX() + width> chunkEnd)
+        //If player is closer to end of chunk then render weight then we create next chunk
+        if (getPlayerX() + width + 1 > chunkEnd)
         {
-            new Chunk(chunkEnd);
+            rightChunk = new Chunk(chunkEnd);
             chunkEnd += width;
         }
-        //If player closer to begin of chunk then render weight then we create next chunk
-        if (getPlayerX() - width < chunkBegin)
+        //Deleting left chunk
+        if (getPlayerX() > chunkBegin + 2 * width)
         {
-            new Chunk(chunkBegin - width);
+            chunkBegin += width;
+            leftChunk.deleteChunk();
+            leftChunk = centerChunk;
+            centerChunk = rightChunk;
+        }
+        //If player is closer to begin of chunk then render weight then we create next chunk
+        if (getPlayerX() - width - 1  < chunkBegin)
+        {
+            leftChunk = new Chunk(chunkBegin - width);
             chunkBegin -= width;
         }
-            
+        //Deleting right chunk
+        if (getPlayerX() < chunkEnd - 2 * width)
+        {
+            chunkEnd -= width;
+            rightChunk.deleteChunk();
+            rightChunk = centerChunk;
+            centerChunk = leftChunk;
+        }
+        Debug.Log(chunkBegin + " " + chunkEnd);
     }
 
     int getPlayerX()

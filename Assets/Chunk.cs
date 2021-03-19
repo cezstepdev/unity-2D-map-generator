@@ -22,17 +22,17 @@ public class Chunk : MonoBehaviour
     public static GameObject cave;
 
     //Height in every X posiotion
-    int[] perLineHeight;
+    private int[] perLineHeight;
     //Chunk array representation
-    int[,] map;
+    private int[,] map;
     //the coordinate of the beginning of chunk
-    private int chunkBegin;
+    public int chunkBegin;
+    private List<GameObject> blocks;
 
 
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {  
     }
 
     // Update is called once per frame
@@ -42,6 +42,7 @@ public class Chunk : MonoBehaviour
 
     public Chunk(int chunkBegin)
     {
+        blocks = new List<GameObject>();
         this.chunkBegin = chunkBegin;
         perLineHeight = new int[width];
         map = generateArray();
@@ -153,14 +154,27 @@ public class Chunk : MonoBehaviour
             {
                 if (map[x, y] == 1)
                 {
-                    Instantiate(ground, new Vector2(xBlockPlace, y), Quaternion.identity);
+                    blocks.Add(Instantiate(ground, new Vector2(xBlockPlace, y), Quaternion.identity));
                 }
                 else if (map[x, y] == 2)
                 {
-                    Instantiate(cave, new Vector2(xBlockPlace, y), Quaternion.identity);
+                    blocks.Add(Instantiate(cave, new Vector2(xBlockPlace, y), Quaternion.identity));
                 }
             }
             xBlockPlace++;
         }
+    }
+
+    public void deleteChunk()
+    {
+        foreach(GameObject block in blocks)
+        {
+            Destroy(block);
+        }
+    }
+
+    public void saveMap()
+    {
+        //Here will be saving int[,] map to file
     }
 }
