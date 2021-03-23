@@ -52,8 +52,9 @@ public class TerrainGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //If player is closer to end of chunk then render weight then we create next chunk
-        if (getPlayerX() + width + 1 > chunkEnd)
+        if (getPlayerX() + width - 1 > chunkEnd)
         {
             rightChunk = new Chunk(chunkEnd);
             chunkEnd += width;
@@ -61,13 +62,14 @@ public class TerrainGenerator : MonoBehaviour
         //Deleting left chunk
         if (getPlayerX() > chunkBegin + 2 * width)
         {
+            //Debug.Log(getPlayerX() + " " + chunkBegin + " " + chunkEnd);
             chunkBegin += width;
             leftChunk.deleteChunk();
             leftChunk = centerChunk;
             centerChunk = rightChunk;
         }
         //If player is closer to begin of chunk then render weight then we create next chunk
-        if (getPlayerX() - width - 1  < chunkBegin)
+        if (getPlayerX() - width + 1  < chunkBegin)
         {
             leftChunk = new Chunk(chunkBegin - width);
             chunkBegin -= width;
@@ -80,7 +82,6 @@ public class TerrainGenerator : MonoBehaviour
             rightChunk = centerChunk;
             centerChunk = leftChunk;
         }
-        Debug.Log(chunkBegin + " " + chunkEnd);
     }
 
     int getPlayerX()

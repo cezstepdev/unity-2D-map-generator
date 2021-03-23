@@ -63,7 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BinarySerializer\BinarySerializer.cs" />
     <Compile Include="Assets\Chunk.cs" />
+    <Compile Include="Assets\ChunkArray.cs" />
     <Compile Include="Assets\PlayerGrounded.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\TerrainGenerator.cs" />

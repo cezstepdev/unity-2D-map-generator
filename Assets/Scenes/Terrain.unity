@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 752593605}
   height: 100
-  width: 40
+  width: 20
   smoothness: 90
   caveSmoothness: 1
   seed: 100

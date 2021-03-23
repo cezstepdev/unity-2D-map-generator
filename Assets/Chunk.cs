@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour
@@ -20,13 +19,13 @@ public class Chunk : MonoBehaviour
     public static GameObject ground;
     //Prefab object representing caves
     public static GameObject cave;
-
     //Height in every X posiotion
     private int[] perLineHeight;
     //Chunk array representation
     private int[,] map;
     //the coordinate of the beginning of chunk
     public int chunkBegin;
+    //List of all blocks on that chunk
     private List<GameObject> blocks;
 
 
@@ -42,13 +41,7 @@ public class Chunk : MonoBehaviour
 
     public Chunk(int chunkBegin)
     {
-        blocks = new List<GameObject>();
-        this.chunkBegin = chunkBegin;
-        perLineHeight = new int[width];
-        map = generateArray();
-        map = terrainGenerator(map);
-        smoothCaves();
-        renderMap(map);
+        loadChunk(chunkBegin);
     }
 
     //fill the array with zeros
@@ -167,14 +160,41 @@ public class Chunk : MonoBehaviour
 
     public void deleteChunk()
     {
+        saveChunk();
+
         foreach(GameObject block in blocks)
         {
             Destroy(block);
         }
     }
 
-    public void saveMap()
+    public void saveChunk()
     {
+        string fileName = "filename" + chunkBegin;
+        ChunkArray chunkArray = new ChunkArray(map, chunkBegin);
+        BinarySerializer.Save(chunkArray, fileName);
+        Debug.Log(Application.persistentDataPath + "/GameData/");
         //Here will be saving int[,] map to file
+    }
+
+    public void loadChunk(int chunkBegin)
+    {
+        blocks = new List<GameObject>();
+        this.chunkBegin = chunkBegin;
+
+        if (BinarySerializer.HasSaved("filename" + chunkBegin))
+        {
+            ChunkArray chunkArray = BinarySerializer.Load<ChunkArray>("filename" + chunkBegin);
+            this.map = chunkArray.map;
+        }
+        else
+        {
+            perLineHeight = new int[width];
+            map = generateArray();
+            map = terrainGenerator(map);
+            smoothCaves();
+        }
+
+        renderMap(map);
     }
 }
