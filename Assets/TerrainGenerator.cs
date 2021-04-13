@@ -5,9 +5,9 @@ public class TerrainGenerator : MonoBehaviour
     public GameObject player;
     private int chunkBegin;
     private int chunkEnd;
-    private Chunk leftChunk;
-    private Chunk centerChunk;
-    private Chunk rightChunk;
+    public static Chunk leftChunk;
+    public static Chunk centerChunk;
+    public static Chunk rightChunk;
 
     //Render width and height
     [SerializeField] int height, width;
@@ -20,10 +20,7 @@ public class TerrainGenerator : MonoBehaviour
     //ground to cave ratio
     [Range(0, 100)]
     [SerializeField] int fill;
-    //Prefab object representing gound
-    [SerializeField] GameObject ground;
-    //Prefab object representing caves
-    [SerializeField] GameObject cave;
+    public Blocks blocks;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +42,9 @@ public class TerrainGenerator : MonoBehaviour
         Chunk.caveSmoothness = caveSmoothness;
         Chunk.seed = seed;
         Chunk.fill = fill;
-        Chunk.ground = ground;
-        Chunk.cave = cave;
+        Chunk.ground = blocks.ground;
+        Chunk.cave = blocks.cave;
+        Chunk.air = blocks.air;
     }
 
     // Update is called once per frame

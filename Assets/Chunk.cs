@@ -19,14 +19,15 @@ public class Chunk : MonoBehaviour
     public static GameObject ground;
     //Prefab object representing caves
     public static GameObject cave;
+    public static GameObject air;
     //Height in every X posiotion
     private int[] perLineHeight;
     //Chunk array representation
-    private int[,] map;
+    public int[,] map;
     //the coordinate of the beginning of chunk
     public int chunkBegin;
     //List of all blocks on that chunk
-    private List<GameObject> blocks;
+    public List<GameObject> blocks;
 
 
     // Start is called before the first frame update
@@ -145,6 +146,10 @@ public class Chunk : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
+                if (map[x, y] == 0)
+                {
+                    blocks.Add(Instantiate(air, new Vector2(xBlockPlace, y), Quaternion.identity));
+                }
                 if (map[x, y] == 1)
                 {
                     blocks.Add(Instantiate(ground, new Vector2(xBlockPlace, y), Quaternion.identity));

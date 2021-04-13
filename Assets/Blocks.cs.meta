@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cff64ee4b00142b43a5f48cc03335295
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ground: {fileID: 7435040989738859394, guid: 665c09bb02e41d04da3788a8d3ccb231,
+      type: 3}
+  - cave: {fileID: 5849130776414368623, guid: 6116067781fc97840ba5d77d0a28c10a, type: 3}
+  - air: {fileID: 5849130776414368623, guid: 45120e8c8381e6a47ace4c30e5fd2da9, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
