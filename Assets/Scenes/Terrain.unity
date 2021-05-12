@@ -320,7 +320,7 @@ PrefabInstance:
     - target: {fileID: 740078867042666649, guid: 368e4a7e4439b8d41b98e2f2af8f16ba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 37
+      value: 39
       objectReference: {fileID: 0}
     - target: {fileID: 740078867042666649, guid: 368e4a7e4439b8d41b98e2f2af8f16ba,
         type: 3}
@@ -427,6 +427,48 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5849130776414368623, guid: 45120e8c8381e6a47ace4c30e5fd2da9,
         type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: dirt
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: 665c09bb02e41d04da3788a8d3ccb231,
+        type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: gold
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: e0d4991175c53cd4cb3a1101f285f313,
+        type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: iron
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: 45b416bf3c551bc45bb4de7bb152ba39,
+        type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: grass
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: 28ce87eaeabf92241b5e2dde0259e3c8,
+        type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: stone
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: 18c22130c7fabd34b91ffd6aee5ccdee,
+        type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: goldOre
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: e0d4991175c53cd4cb3a1101f285f313,
+        type: 3}
+    - target: {fileID: 2665866926202421941, guid: ff1a532965434d849b9782b480dc7b2e,
+        type: 3}
+      propertyPath: ironOre
+      value: 
+      objectReference: {fileID: 7435040989738859394, guid: 45b416bf3c551bc45bb4de7bb152ba39,
+        type: 3}
     - target: {fileID: 2665866926202421942, guid: ff1a532965434d849b9782b480dc7b2e,
         type: 3}
       propertyPath: m_RootOrder
@@ -440,7 +482,7 @@ PrefabInstance:
     - target: {fileID: 2665866926202421942, guid: ff1a532965434d849b9782b480dc7b2e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 28.963522
+      value: 30.96352
       objectReference: {fileID: 0}
     - target: {fileID: 2665866926202421942, guid: ff1a532965434d849b9782b480dc7b2e,
         type: 3}

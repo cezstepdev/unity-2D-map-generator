@@ -43,5 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff64ee4b00142b43a5f48cc03335295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground: {fileID: 7435040989738859394, guid: 665c09bb02e41d04da3788a8d3ccb231, type: 3}
+  stone: {fileID: 7435040989738859394, guid: 18c22130c7fabd34b91ffd6aee5ccdee, type: 3}
   cave: {fileID: 5849130776414368623, guid: 6116067781fc97840ba5d77d0a28c10a, type: 3}
+  air: {fileID: 5849130776414368623, guid: 45120e8c8381e6a47ace4c30e5fd2da9, type: 3}
+  grass: {fileID: 7435040989738859394, guid: 28ce87eaeabf92241b5e2dde0259e3c8, type: 3}
+  dirt: {fileID: 7435040989738859394, guid: 665c09bb02e41d04da3788a8d3ccb231, type: 3}
+  iron: {fileID: 7435040989738859394, guid: 45b416bf3c551bc45bb4de7bb152ba39, type: 3}
+  gold: {fileID: 7435040989738859394, guid: e0d4991175c53cd4cb3a1101f285f313, type: 3}

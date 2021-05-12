@@ -28,7 +28,7 @@ public class PlaceObject : MonoBehaviour
 
             Chunk chunk = BlockDestroy.calculateChunk(x);
             chunk.map[x - chunk.chunkBegin, y] = 1;
-            chunk.blocks.Add(Instantiate(blocks.ground, new Vector2(x, y), Quaternion.identity));
+            chunk.blocks.Add(Instantiate(blocks.stone, new Vector2(x, y), Quaternion.identity));
         }
     }
 }

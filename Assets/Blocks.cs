@@ -5,10 +5,14 @@ using UnityEngine;
 public class Blocks : MonoBehaviour
 {
     //Prefab object representing gound
-    public GameObject ground;
+    public GameObject stone;
     //Prefab object representing caves
     public GameObject cave;
     public GameObject air;
+    public GameObject grass;
+    public GameObject dirt;
+    public GameObject iron;
+    public GameObject gold;
 
     // Start is called before the first frame update
     void Start()

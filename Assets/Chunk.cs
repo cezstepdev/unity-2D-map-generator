@@ -15,17 +15,24 @@ public class Chunk : MonoBehaviour
     public static float seed;
     //ground to cave ratio
     public static int fill;
-    //Prefab object representing gound
-    public static GameObject ground;
-    //Prefab object representing caves
-    public static GameObject cave;
-    public static GameObject air;
+
     //Height in every X posiotion
     private int[] perLineHeight;
     //Chunk array representation
     public int[,] map;
     //the coordinate of the beginning of chunk
     public int chunkBegin;
+
+    public static GameObject air;
+    public static GameObject grass;
+    public static GameObject dirt;
+    //Prefab object representing gound
+    public static GameObject stone;
+    //Prefab object representing caves
+    public static GameObject cave;
+    public static GameObject gold;
+    public static GameObject iron;
+
     //List of all blocks on that chunk
     public List<GameObject> blocks;
 
@@ -77,6 +84,12 @@ public class Chunk : MonoBehaviour
             {
                 map[x, y] = (random.Next(1, 100) < fill) ? 1 : 2;
             }
+
+            for (int y = 0; y < perlinHeight; y++)
+            {
+                if (map[x, y] != 2)
+                    map[x, y] = (random.Next(1, 100) < 95) ? 1 : (random.Next(1, 100) < 95 ? 4 : 3);
+            }
             chunkX++;
         }
 
@@ -124,16 +137,21 @@ public class Chunk : MonoBehaviour
                     else
                     {
                         surroudingGround = getSurroundingGround(x, y);
-                        if (surroudingGround > 4)
+                        if (map[x, y] == 1 || map[x, y] == 2)
                         {
-                            map[x, y] = 1;
-                        }
-                        else if (surroudingGround < 4)
-                        {
-                            map[x, y] = 2;
+                            if (surroudingGround > 4)
+                            {
+                                map[x, y] = 1;
+                            }
+                            else if (surroudingGround < 4)
+                            {
+                                map[x, y] = 2;
+                            }
                         }
                     }
                 }
+                map[x, perLineHeight[x]] = 5;
+                map[x, perLineHeight[x] + 1] = 6;
             }
         }
     }
@@ -152,11 +170,27 @@ public class Chunk : MonoBehaviour
                 }
                 if (map[x, y] == 1)
                 {
-                    blocks.Add(Instantiate(ground, new Vector2(xBlockPlace, y), Quaternion.identity));
+                    blocks.Add(Instantiate(stone, new Vector2(xBlockPlace, y), Quaternion.identity));
                 }
                 else if (map[x, y] == 2)
                 {
                     blocks.Add(Instantiate(cave, new Vector2(xBlockPlace, y), Quaternion.identity));
+                }
+                else if (map[x, y] == 3)
+                {
+                    blocks.Add(Instantiate(gold, new Vector2(xBlockPlace, y), Quaternion.identity));
+                }
+                else if (map[x, y] == 4)
+                {
+                    blocks.Add(Instantiate(iron, new Vector2(xBlockPlace, y), Quaternion.identity));
+                }
+                else if (map[x, y] == 5)
+                {
+                    blocks.Add(Instantiate(dirt, new Vector2(xBlockPlace, y), Quaternion.identity));
+                }
+                else if (map[x, y] == 6)
+                {
+                    blocks.Add(Instantiate(grass, new Vector2(xBlockPlace, y), Quaternion.identity));
                 }
             }
             xBlockPlace++;

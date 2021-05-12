@@ -42,15 +42,26 @@ public class TerrainGenerator : MonoBehaviour
         Chunk.caveSmoothness = caveSmoothness;
         Chunk.seed = seed;
         Chunk.fill = fill;
-        Chunk.ground = blocks.ground;
-        Chunk.cave = blocks.cave;
+
         Chunk.air = blocks.air;
+        Chunk.grass = blocks.grass;
+        Chunk.dirt = blocks.dirt;
+        Chunk.stone = blocks.stone;
+        Chunk.cave = blocks.cave;
+        Chunk.gold = blocks.gold;
+        Chunk.iron = blocks.iron;
+    }
+
+    public void save()
+    {
+        leftChunk.saveChunk();
+        centerChunk.saveChunk();
+        rightChunk.saveChunk();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         //If player is closer to end of chunk then render weight then we create next chunk
         if (getPlayerX() + width - 1 > chunkEnd)
         {
